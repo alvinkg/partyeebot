@@ -5,7 +5,7 @@ const { message } = require('telegraf/filters');
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const keyboard = Markup.inlineKeyboard([
-	Markup.button.login("Login", "http://domain.tld/hash", {
+	Markup.button.login("Login", "https://www.google.com/", {
 		bot_username: "my_bot",
 		request_write_access: true,
 	}),

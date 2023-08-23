@@ -2,6 +2,8 @@ const { Telegraf, Markup } = require("telegraf")
 // add message
 const { message } = require('telegraf/filters');
 // BOT_TOKEN is env var in netlify
+
+const token = process.env.BOT_TOKEN
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 process.env.PROVIDER_TOKEN = "284685063:TEST:ZDM5ODYyODhiMzM1"
@@ -49,7 +51,7 @@ const replyOptions = Markup.inlineKeyboard([
 	Markup.button.pay("💸 Buy"),
 	Markup.button.url("❤️", "http://telegraf.js.org"),
 ]);
-
+bot.help((ctx) => ctx.reply(token))
 bot.start(ctx => ctx.replyWithInvoice(invoice));
 bot.command("buy", ctx => ctx.replyWithInvoice(invoice, replyOptions));
 bot.on("shipping_query", ctx =>

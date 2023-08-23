@@ -5,14 +5,14 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start(ctx => {
   console.log("Received /start command")
   try {
-    return ctx.reply("Hi")
+    return ctx.reply("Hi alvin")
   } catch (e) {
     console.error("error in start action:", e)
     return ctx.reply("Error occured")
   }
 })
 
-// bot.help((ctx) => ctx.reply('Send me a sticker'));
+bot.help((ctx) => ctx.reply('Send me a sticker'));
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 // essential syntax that is forgotten by all tutorials

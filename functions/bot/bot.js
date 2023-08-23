@@ -4,9 +4,12 @@ const { message } = require('telegraf/filters');
 // BOT_TOKEN is env var in netlify
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-if (process.env.PROVIDER_TOKEN === undefined) {
+if (PROVIDER_TOKEN === undefined) {
 	throw new TypeError("PROVIDER_TOKEN must be provided!");
 }
+// if (process.env.PROVIDER_TOKEN === undefined) {
+// 	throw new TypeError("PROVIDER_TOKEN must be provided!");
+// }
 
 const invoice = {
 	provider_token: process.env.PROVIDER_TOKEN,

@@ -1,4 +1,5 @@
 const { Telegraf } = require("telegraf")
+// BOT_TOKEN is env var in netlify
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 bot.start(ctx => {
@@ -11,7 +12,11 @@ bot.start(ctx => {
   }
 })
 
+bot.help((ctx) => ctx.reply('Send me a sticker'));
+
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
+// essential syntax that is forgotten by all tutorials
+
 exports.handler = async event => {
   try {
     await bot.handleUpdate(JSON.parse(event.body))

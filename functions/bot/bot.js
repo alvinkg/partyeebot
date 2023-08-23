@@ -25,6 +25,8 @@ const invoice = {
 	currency: "usd",
 	photo_url:
 		"https://erkelzaar.tsudao.com/models/perrotta/TIME_MACHINE.jpg",
+    photo_height: 512,
+    photo_width: 512,
     is_flexible: true,
 	prices: [
 		{ label: "Working Time Machine", amount: 4200 },

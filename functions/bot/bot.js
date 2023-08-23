@@ -4,28 +4,55 @@ const { message } = require('telegraf/filters');
 // BOT_TOKEN is env var in netlify
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const keyboard = Markup.keyboard([
-	Markup.button.pollRequest("Create poll", "regular"),
-	Markup.button.pollRequest("Create quiz", "quiz"),
+if (process.env.PROVIDER_TOKEN === undefined) {
+	throw new TypeError("PROVIDER_TOKEN must be provided!");
+}
+
+const invoice = {
+	provider_token: process.env.PROVIDER_TOKEN,
+	start_parameter: "time-machine-sku",
+	title: "Working Time Machine",
+	description:
+		"Want to visit your great-great-great-grandparents? Make a fortune at the races? Shake hands with Hammurabi and take a stroll in the Hanging Gardens? Order our Working Time Machine today!",
+	currency: "usd",
+	photo_url:
+		"https://img.clipartfest.com/5a7f4b14461d1ab2caaa656bcee42aeb_future-me-fredo-and-pidjin-the-webcomic-time-travel-cartoon_390-240.png",
+	is_flexible: true,
+	prices: [
+		{ label: "Working Time Machine", amount: 4200 },
+		{ label: "Gift wrapping", amount: 1000 },
+	],
+	payload: JSON.stringify({
+		coupon: "BLACK FRIDAY",
+	}),
+};
+
+const shippingOptions = [
+	{
+		id: "unicorn",
+		title: "Unicorn express",
+		prices: [{ label: "Unicorn", amount: 2000 }],
+	},
+	{
+		id: "slowpoke",
+		title: "Slowpoke mail",
+		prices: [{ label: "Slowpoke", amount: 100 }],
+	},
+];
+
+const replyOptions = Markup.inlineKeyboard([
+	Markup.button.pay("💸 Buy"),
+	Markup.button.url("❤️", "http://telegraf.js.org"),
 ]);
 
-
-bot.on("poll", ctx => console.log("Poll update", ctx.poll));
-bot.on("poll_answer", ctx => console.log("Poll answer", ctx.pollAnswer));
-
-bot.start(ctx => ctx.reply("supported commands: /poll /quiz", keyboard));
-
-bot.command("poll", ctx =>
-	ctx.replyWithPoll("Your favorite math constant", ["x", "e", "π", "φ", "γ"], {
-		is_anonymous: false,
-	}),
+bot.start(ctx => ctx.replyWithInvoice(invoice));
+bot.command("buy", ctx => ctx.replyWithInvoice(invoice, replyOptions));
+bot.on("shipping_query", ctx =>
+	ctx.answerShippingQuery(true, shippingOptions, undefined),
 );
-bot.command("quiz", ctx =>
-	ctx.replyWithQuiz("2b|!2b", ["True", "False"], { correct_option_id: 0 }),
-);
+bot.on("pre_checkout_query", ctx => ctx.answerPreCheckoutQuery(true));
+bot.on("successful_payment", () => console.log("Woohoo"));
 
-bot.start(ctx => ctx.reply("Hello", keyboard));
-bot.action("delete", ctx => ctx.deleteMessage());
 
 
 

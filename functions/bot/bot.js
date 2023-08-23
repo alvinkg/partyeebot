@@ -6,7 +6,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const keyboard = Markup.inlineKeyboard([
 	Markup.button.login("Login", "https://www.google.com/", {
-		bot_username: "my_bot",
+		bot_username: "partyeebot",
 		request_write_access: true,
 	}),
 	Markup.button.url("❤️", "http://telegraf.js.org"),

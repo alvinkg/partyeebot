@@ -12,7 +12,7 @@ bot.start(ctx => {
   }
 })
 
-bot.help((ctx) => ctx.reply('Send me a sticker'));
+// bot.help((ctx) => ctx.reply('Send me a sticker'));
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 // essential syntax that is forgotten by all tutorials

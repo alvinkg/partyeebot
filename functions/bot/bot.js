@@ -20,6 +20,14 @@ bot.hears('hi', (ctx) => ctx.reply('Hey there'));
 bot.command('oldschool', (ctx) => ctx.reply('Hello'));
 bot.command('hipster', Telegraf.reply('λ'));
 
+bot.on(message('text'), async (ctx) => {
+    // Explicit usage
+    await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`);
+  
+    // Using context shortcut
+    await ctx.reply(`Hello ${ctx.state.role}`);
+  });
+
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 // essential syntax that is forgotten by all tutorials
 

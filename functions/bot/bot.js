@@ -21,7 +21,7 @@ const invoice = {
 		"Want to visit your great-great-great-grandparents? Make a fortune at the races? Shake hands with Hammurabi and take a stroll in the Hanging Gardens? Order our Working Time Machine today!",
 	currency: "usd",
 	photo_url:
-		"https://img.clipartfest.com/5a7f4b14461d1ab2caaa656bcee42aeb_future-me-fredo-and-pidjin-the-webcomic-time-travel-cartoon_390-240.png",
+		"https://erkelzaar.tsudao.com/models/perrotta/TIME_MACHINE.jpg",
 	is_flexible: true,
 	prices: [
 		{ label: "Working Time Machine", amount: 4200 },

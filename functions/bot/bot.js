@@ -60,8 +60,8 @@ bot.on("shipping_query", ctx =>
 );
 bot.on("pre_checkout_query", ctx => ctx.answerPreCheckoutQuery(true));
 bot.on("successful_payment", () => console.log("Woohoo"));
-bot.on("message", ctx => {
-    return ctx.reply(`Hello ${ctx.update.message.from.first_name}!`);
+bot.on(message("text"), async ctx => {
+    await ctx.sendMessage("Hello");
 })
 
 

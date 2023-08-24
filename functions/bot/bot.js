@@ -7,7 +7,7 @@ const { message } = require('telegraf/filters');
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-process.env.PROVIDER_TOKEN = "284685063:TEST:ZDM5ODYyODhiMzM1"
+// process.env.PROVIDER_TOKEN = "284685063:TEST:ZDM5ODYyODhiMzM1"
 
 if (process.env.PROVIDER_TOKEN === undefined) {
 	throw new TypeError("PROVIDER_TOKEN must be provided!");
@@ -31,7 +31,9 @@ const invoice = {
 	prices: [
 		{ label: "Working Time Machine", amount: 4200 },
 		{ label: "Gift wrapping", amount: 1000 },
-	],
+		{ label: "Discount", amount: -700 },
+    ],
+    suggested_tip_amounts:[],
 	payload: JSON.stringify({
 		coupon: "BLACK FRIDAY",
 	}),

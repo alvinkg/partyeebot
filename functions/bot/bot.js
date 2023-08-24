@@ -2,19 +2,14 @@ const { Telegraf, Markup } = require("telegraf")
 // add message
 const { message } = require('telegraf/filters');
 // BOT_TOKEN is env var in netlify
-
-// const token = process.env.BOT_TOKEN
+// PROVIDER_TOKEN is env var in netlify env var
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-
-// process.env.PROVIDER_TOKEN = "284685063:TEST:ZDM5ODYyODhiMzM1"
+const web_link = "https://dapper-longma-9f9110.netlify.app/";
 
 if (process.env.PROVIDER_TOKEN === undefined) {
 	throw new TypeError("PROVIDER_TOKEN must be provided!");
 }
-// if (process.env.PROVIDER_TOKEN === undefined) {
-// 	throw new TypeError("PROVIDER_TOKEN must be provided!");
-// }
 
 const invoice = {
 	provider_token: process.env.PROVIDER_TOKEN,
@@ -56,8 +51,17 @@ const replyOptions = Markup.inlineKeyboard([
 	Markup.button.pay("💸 Buy"),
 	Markup.button.url("❤️", "http://telegraf.js.org"),
 ]);
-bot.start(ctx => ctx.replyWithInvoice(invoice));
-// bot.help((ctx) => ctx.reply(provider_token))
+
+bot.start((ctx) =>
+  ctx.reply("Welcome :-)", {
+    reply_markup: {
+      keyboard: [[{ text: "web app", web_app: { url: web_link } }]],
+    },
+  })
+);
+// bot.start(ctx => ctx.replyWithInvoice(invoice));
+
+
 bot.command("buy", ctx => ctx.replyWithInvoice(invoice, replyOptions));
 bot.on("shipping_query", ctx =>
 	ctx.answerShippingQuery(true, shippingOptions, undefined),
